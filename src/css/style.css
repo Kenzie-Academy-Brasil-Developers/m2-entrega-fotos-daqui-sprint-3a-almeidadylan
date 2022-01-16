@@ -62,8 +62,6 @@ table {
     border-radius: 3px;
 }
 
-h1{}
-
 .container-image{
     display: flex;
     flex-direction: column;
