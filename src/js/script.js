@@ -1,47 +1,23 @@
-/*
-navigator.geolocation.getCurrentPosition(function(pos){
-    
-    if(navigator.geolocation){
-        console.log("oi")
+let pos = {
+    latitude: -22.9519,
+    longitude: -43.2105
+}
 
-        constructorImagens(pos.coords)
-    } 
-    else{
-        console.log("hello")
-        console.log(pos)
-        constructorImagens(position)
-    }
-    
-})*/
+if ("geolocation" in navigator){
 
-//function gps(){
+    navigator.geolocation.getCurrentPosition(function(position){
 
-    let pos = {
-        latitude: -22.9519,
-        longitude: -43.2105
-    }
+        constructorImagens(position.coords)
+        console.log("if")
 
-/*   if ("geolocation" in navigator){
-        navigator.geolocation.getCurrentPosition(function(position){
-            constructorImagens(position.coords)
-            console.log("if")
-        },function(error){
-            //if(error.code == 1){
-           //     console.log("acertou")
-          //  }
-            console.log(error)
-        })
-    }*/
+    },
+    function(error){
 
-        if ("geolocation" in navigator){
-            navigator.geolocation.getCurrentPosition(function(position){
-                constructorImagens(position.coords)
-                console.log("if")
-            },function(error){
-                console.log(error)
-                constructorImagens(pos)
-            })
-        }
+        console.log(error)
+        constructorImagens(pos)
+
+    })
+}
 
 
 const img = document.querySelector("img");
