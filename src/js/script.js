@@ -1,18 +1,23 @@
-navigator.geolocation.getCurrentPosition(function(position){
-    if(!geolocation.navigator){
-        position.coords.latitude = 46.2751 
-        position.coords.longitude = 8.86472
+
+navigator.geolocation.getCurrentPosition(async function(position){
+
+    position.coords.latitude = 46.2751; 
+    position.coords.longitude = 8.86472;
+
+    if("geolocation" in navigator){
+        console.log("acertou");
     }
-    else{
-        position.coords.longitude;
-        position.coords.longitude;
+    else {
+        console.log("errou");
     }
+    
 })
 
 const img = document.querySelector("img");
 const diminui = document.querySelector(".diminui");
 const aumenta = document.querySelector(".aumenta");
-const descricao = document.querySelector(".descricao")
+const descricao = document.querySelector("p")
+const a = document.querySelector("a")
 let indice = 0;
 
 function constructImageURL (photoObj) {
@@ -27,10 +32,12 @@ function constructorImagens(){
 fetch("https://shrouded-mountain-15003.herokuapp.com/https://flickr.com/services/rest/?api_key=652478b2f38de1d72e03b56e4db4a163&format=json&nojsoncallback=1&method=flickr.photos.search&safe_search=1&per_page=5&lat=-25.4284&lon=-49.2733&text=cachorros")
 .then(response => response.json())
 .then(Element => {
-    console.log(Element)
+
     let imageUrl = constructImageURL(Element.photos.photo[indice]);
     img.src = imageUrl
     descricao.innerHTML = Element.photos.photo[indice].title;
+    a.href = constructImageURL(Element.photos.photo[indice]);
+    a.innerHTML = constructImageURL(Element.photos.photo[indice]);
 
     aumenta.addEventListener("click", function(e){
 
@@ -45,6 +52,9 @@ fetch("https://shrouded-mountain-15003.herokuapp.com/https://flickr.com/services
         img.src = constructImageURL(Element.photos.photo[indice]);
         descricao.innerHTML = "";
         descricao.innerHTML = Element.photos.photo[indice].title;
+        a.innerHTML = "";
+        a.href = constructImageURL(Element.photos.photo[indice]);
+        a.innerHTML = constructImageURL(Element.photos.photo[indice]);
         
     })
 
@@ -61,6 +71,10 @@ fetch("https://shrouded-mountain-15003.herokuapp.com/https://flickr.com/services
         img.src = constructImageURL(Element.photos.photo[indice]);
         descricao.innerHTML = "";
         descricao.innerHTML = Element.photos.photo[indice].title;
+        a.innerHTML = "";
+        a.href = constructImageURL(Element.photos.photo[indice]);
+        a.innerHTML = constructImageURL(Element.photos.photo[indice]);
+        
 
     })
 })
