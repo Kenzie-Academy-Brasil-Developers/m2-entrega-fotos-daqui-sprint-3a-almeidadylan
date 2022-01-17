@@ -1,17 +1,48 @@
+/*
+navigator.geolocation.getCurrentPosition(function(pos){
+    
+    if(navigator.geolocation){
+        console.log("oi")
 
-navigator.geolocation.getCurrentPosition(async function(position){
-
-    position.coords.latitude = 46.2751; 
-    position.coords.longitude = 8.86472;
-
-    if("geolocation" in navigator){
-        console.log("acertou");
-    }
-    else {
-        console.log("errou");
+        constructorImagens(pos.coords)
+    } 
+    else{
+        console.log("hello")
+        console.log(pos)
+        constructorImagens(position)
     }
     
-})
+})*/
+
+//function gps(){
+
+    let pos = {
+        latitude: -22.9519,
+        longitude: -43.2105
+    }
+
+/*   if ("geolocation" in navigator){
+        navigator.geolocation.getCurrentPosition(function(position){
+            constructorImagens(position.coords)
+            console.log("if")
+        },function(error){
+            //if(error.code == 1){
+           //     console.log("acertou")
+          //  }
+            console.log(error)
+        })
+    }*/
+
+        if ("geolocation" in navigator){
+            navigator.geolocation.getCurrentPosition(function(position){
+                constructorImagens(position.coords)
+                console.log("if")
+            },function(error){
+                console.log(error)
+                constructorImagens(pos)
+            })
+        }
+
 
 const img = document.querySelector("img");
 const diminui = document.querySelector(".diminui");
@@ -28,10 +59,11 @@ function constructImageURL (photoObj) {
 
 }
 
-function constructorImagens(){
-fetch("https://shrouded-mountain-15003.herokuapp.com/https://flickr.com/services/rest/?api_key=652478b2f38de1d72e03b56e4db4a163&format=json&nojsoncallback=1&method=flickr.photos.search&safe_search=1&per_page=5&lat=-25.4284&lon=-49.2733&text=cachorros")
-.then(response => response.json())
-.then(Element => {
+async function constructorImagens(pos){
+
+    console.log("cheguei")
+const response = await fetch(`https://shrouded-mountain-15003.herokuapp.com/https://flickr.com/services/rest/?api_key=652478b2f38de1d72e03b56e4db4a163&format=json&nojsoncallback=1&method=flickr.photos.search&safe_search=1&per_page=5&lat=${pos.latitude}&lon=${pos.longitude}&text=cachorros`)
+const Element = await response.json()
 
     let imageUrl = constructImageURL(Element.photos.photo[indice]);
     img.src = imageUrl
@@ -77,7 +109,5 @@ fetch("https://shrouded-mountain-15003.herokuapp.com/https://flickr.com/services
         
 
     })
-})
 }
-constructorImagens()
 
