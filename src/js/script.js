@@ -8,12 +8,10 @@ if ("geolocation" in navigator){
     navigator.geolocation.getCurrentPosition(function(position){
 
         constructorImagens(position.coords)
-        console.log("if")
 
     },
     function(error){
 
-        console.log(error)
         constructorImagens(pos)
 
     })
@@ -37,7 +35,6 @@ function constructImageURL (photoObj) {
 
 async function constructorImagens(pos){
 
-    console.log("cheguei")
 const response = await fetch(`https://shrouded-mountain-15003.herokuapp.com/https://flickr.com/services/rest/?api_key=652478b2f38de1d72e03b56e4db4a163&format=json&nojsoncallback=1&method=flickr.photos.search&safe_search=1&per_page=5&lat=${pos.latitude}&lon=${pos.longitude}&text=cachorros`)
 const Element = await response.json()
 
